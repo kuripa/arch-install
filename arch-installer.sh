@@ -103,7 +103,7 @@ create_user()
     
     arch-chroot /mnt useradd -m -g users -G wheel,storage,power,video,audio,games,input -s /bin/bash "$user"
     
-    echo "$username:$password" | chpasswd --root /mnt
+    echo "$username:$password" | chpasswd /mnt
     
     sed -i 's/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g' /mnt/etc/sudoers
     sed -i 's/# %wheel ALL=(ALL) NOPASSWD: ALL/%wheel ALL=(ALL) NOPASSWD: ALL/g' /mnt/etc/sudoers
@@ -119,7 +119,7 @@ create_root_password()
     clear
     [[ "$password_root" == "$password2_root" ]] || ( echo "Passwords did not match"; exit 1; )
 
-    echo "root:$password_root" | chpasswd --root /mnt
+    echo "root:$password_root" | chpasswd /mnt
 }
 
 set_hostname()
@@ -184,17 +184,17 @@ install_bootloader()
 {
     arch-chroot /mnt bootctl install
     
-    cat <<EOF > /mnt/boot/loader/loader.conf
-    default arch
+cat <<EOF > /mnt/boot/loader/loader.conf
+default arch
 EOF
     
-    cat <<EOF > /mnt/boot/loader/entries/arch.conf
-    title   Arch Linux
-    linux   /vmlinuz-linux
-    initrd  /intel-ucode.img
-    initrd  /initramfs-linux.img
-    options root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
-EOF    
+cat <<EOF > /mnt/boot/loader/entries/arch.conf
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /intel-ucode.img
+initrd  /initramfs-linux.img
+options root=PARTUUID=$(blkid -s PARTUUID -o value "$part_root") rw
+EOF
 }
 
 configure_mkinitcpio()
