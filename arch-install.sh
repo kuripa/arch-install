@@ -64,14 +64,14 @@ partition()
     
     mount "${part_root}" /mnt
     
-    if [ -d /mnt/boot ] then
+    if [ -d /mnt/boot ]; then
         mount "${part_boot}" /mnt/boot
     else
         mkdir /mnt/boot
         mount "${part_boot}" /mnt/boot
     fi
     
-    if [ -d /mnt/home ] then
+    if [ -d /mnt/home ]; then
         mount "${part_home}" /mnt/home
     else
         mkdir /mnt/home
