@@ -25,7 +25,7 @@ check_script()
 check_boot_system()
 {
     echo "Verifying UEFI boot mode"
-    if [ -d /sys/firmware/efi/efivars ] then
+    if [ -d /sys/firmware/efi/efivars ]; then
         echo "UEFI boot mode has been verified."
     else
         echo "Please boot into UEFI mode and start the installation again."
