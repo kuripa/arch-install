@@ -3,6 +3,6 @@
 - Make a bootable usb
 - Boot from the usb in uefi
 - Run the following commands
-  - wget
-  - chmod
-  - ./arch-base
+  - git clone https://github.com/kuripa/arch-install.git
+  - chmod +x ./arch-install.sh
+  - ./arch-install.sh
