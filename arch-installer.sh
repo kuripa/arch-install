@@ -101,7 +101,7 @@ create_user()
     clear
     [[ "$password" == "$password2" ]] || ( echo "Passwords did not match"; exit 1; )
     
-    arch-chroot /mnt useradd -m -g users -G wheel,storage,power,video,audio,games,input -s /bin/bash "$user"
+    arch-chroot /mnt useradd -m -g users -G wheel,storage,power,video,audio,games,input -s /bin/bash "$username"
     
     echo "$username:$password" | chpasswd /mnt
     
